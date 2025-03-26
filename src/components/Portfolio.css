@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .portfolio {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1B1F23; /* Inspired by your dark theme */
+    color: white;
+    overflow-x: hidden;
+  }
+  
+  .circle-container {
+    position: absolute;
+    left: -50dvh;
+    top: 0;
+    width: 100dvh;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .circle {
+    width: 100dvh;
+    height: 100dvh;
+    border-radius: 50%;
+    position: absolute;
+    transition: transform 0.1s linear;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(-20deg);
+  }
+  
+  .segment {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05); /* Subtle effect */
+  }
+  
+  .segment:nth-child(1) { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 30%); }
+  .segment:nth-child(2) { clip-path: polygon(50% 50%, 100% 30%, 100% 100%, 80% 100%); }
+  .segment:nth-child(3) { clip-path: polygon(50% 50%, 80% 100%, 30% 100%, 20% 100%); }
+  
+  .portfolio-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .portfolio h1 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    font-weight: 700;
+  }
+  
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+  
+  .portfolio-card {
+    background: #2C3E50; /* Inspired by your color scheme */
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .portfolio-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .portfolio-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .card-content {
+    padding: 20px;
+  }
+  
+  .card-content h3 {
+    margin: 0 0 10px 0;
+  }
+  
+  .card-content p {
+    color: #ddd;
+    margin: 0 0 15px 0;
+    font-size: 0.9em;
+  }
+  
+  .portfolio-link {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #4A4E69;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+  
+  .portfolio-link:hover {
+    background: #5C677D;
+  }

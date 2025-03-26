@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 132deg;
+  inherits: false;
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(-45deg, #253832, #4a3e6d, #2d4953, #27423b);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Home Section */
+.home {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  padding: 60px 9% 0;
+  color: white;
+  opacity: 0;
+  animation: show-content 1.5s linear forwards;
+  animation-delay: 1.2s;
+}
+
+@keyframes show-content {
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+/* Home Info */
+.home-info h1 {
+  font-size: 55px;
+  font-style: oblique;
+  color: #020606;
+}
+
+.home-info p {
+  font-size: 20px;
+  margin: 10px 0 25px;
+}
+
+.home-info .btn-sci {
+  display: flex;
+  align-items: center;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 30px;
+  background: rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgb(0, 0, 0);
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  transition: 0.5s;
+}
+
+.btn:hover {
+  background: transparent;
+  color: rgb(0, 0, 0);
+  box-shadow: none;
+}
+
+.home-info .btn-sci .sci {
+  margin-left: 20px;
+}
+
+.home-info .btn-sci .sci a {
+  display: inline-flex;
+  padding: 8px;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 50%;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  margin: 0 8px;
+  transition: 0.5s;
+}
+
+.home-info .btn-sci .sci a:hover {
+  background: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  box-shadow: 0 0 10px rgb(0, 0, 0);
+}
+
+/* Home Image - Magic Card Inspired */
+/* Home Image - Magic Card Inspired */
+.home-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-img .img-card {
+  --card-size: 32vw; /* Matches your original size */
+  width: var(--card-size);
+  height: var(--card-size);
+  position: relative;
+  border-radius: 50%;
+  padding: 5px;
+  background: #191c29; /* Dark background for contrast */
+  transition: transform 0.5s ease;
+}
+
+.home-img .img-card:hover {
+  transform: scale(1.05); /* Slight scale-up on hover */
+}
+
+.home-img .img-card::before {
+  content: "";
+  position: absolute;
+  width: 104%;
+  height: 104%;
+  border-radius: 50%;
+  background-image: linear-gradient(
+    var(--rotate),
+    #476a74,
+    #3d518d 43%,
+    #614886
+  );
+  top: -2%;
+  left: -2%;
+  z-index: -1;
+  animation: spin 3s linear infinite;
+}
+
+.home-img .img-card::after {
+  content: "";
+  position: absolute;
+  top: 15%;
+  border-radius: 35% ;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  transform: scale(0.85);
+  filter: blur(20px);
+  background-image: linear-gradient(
+    var(--rotate),
+    #476a74,
+    #3d518d 43%,
+    #614886
+  );
+  opacity: 0.8;
+  z-index: -1;
+  animation: spin 3s linear infinite;
+}
+
+.home-img .img-card:hover::before,
+.home-img .img-card:hover::after {
+  animation: none;
+  opacity: 0;
+}
+
+.home-img .img-content {
+
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #1e3a8a, #0f172a 70%, #000000); /* New background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.home-img .img-content::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(88, 199, 250, 0.15) 0%, transparent 70%);
+  opacity: 0.5;
+  z-index: 2;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.home-img .img-content img {
+  width: 120%;
+  height: 165%;
+  object-fit: cover;
+  filter: brightness(85%);
+  transition: filter 0.5s ease;
+  z-index: 3; /* Ensures image stays above background effects */
+}
+
+.home-img .img-card:hover .img-content img {
+  filter: brightness(100%); /* Brightens image on hover */
+}
+
+@keyframes spin {
+  0% { --rotate: 0deg; }
+  100% { --rotate: 360deg; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 0.5; }
+}

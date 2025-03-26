@@ -1,0 +1,89 @@
+
+
+
+
+
+
+/* -------------------------------------------------------------------------------------------------------- */
+/* css.About */
+/* -------------------------------------------------------------------------------------------------------- */
+section{
+  height: 100vh ;
+  display: flex;
+  justify-content: center ;
+  align-items: center;
+}
+/* SECTION ABOUT */
+#about {
+  background: linear-gradient(135deg, #2f476f, #10283b);
+  color: #fff;
+  padding: 50px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+#about .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+#about h2 {
+  font-size: 2.5rem;
+  color: #4fc3f7; /* Bleu clair */
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+#about p {
+  font-size: 1.1rem;
+  color: #b0bec5; /* Gris clair */
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+#about .skills {
+  margin-top: 20px;
+}
+
+#about .skills h3 {
+  font-size: 1.8rem;
+  color: #4fc3f7;
+  margin-bottom: 15px;
+}
+
+#about .skills ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#about .skills ul li {
+  font-size: 1.2rem;
+  color: #b0bec5;
+  background: #1f2833;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 25px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#about .skills ul li:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(79, 195, 247, 0.4);
+  background: #4fc3f7;
+  color: #0a0a0a;
+}
+
+
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------ */
+
