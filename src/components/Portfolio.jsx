@@ -8,7 +8,7 @@ const Portfolio = () => {
       title: "Personal React Dashboard",
       description: "A responsive React dashboard with real-time data visualization",
       image: "images/Screenshot 2025-03-21 213339.jpg",
-      link: "https://project1.com",
+      link: "https://my-skills-dashboard.vercel.app/",
     },
     {
       id: 2,
