@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Chatbot.css";
 
+// Change cette URL ici selon ton déploiement
+const API_URL = "https://mon-assistant-minirag.onrender.com";
+
 const Chatbot = () => {
   const [visible, setVisible] = useState(false);
   const [messages, setMessages] = useState([
@@ -10,47 +13,50 @@ const Chatbot = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const chatbotRef = useRef(null);
+  const conversationRef = useRef(null);
 
-  // Toggle visibility when clicking the button/icon
   const toggleChatbot = () => {
     setVisible((prev) => !prev);
   };
 
-  // Hide when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // Check if click is outside the chatbot AND not on the button
       if (
         chatbotRef.current &&
         !chatbotRef.current.contains(event.target) &&
-        !event.target.closest(".chatbot-icon") // Exclude clicks on the button
+        !event.target.closest(".chatbot-icon")
       ) {
-        setVisible(false); // Hide the chatbot
+        setVisible(false);
       }
     };
 
     if (visible) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [visible]);
+
+  useEffect(() => {
+    if (conversationRef.current) {
+      conversationRef.current.scrollTop = conversationRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   const handleInputChange = (e) => {
     setInput(e.target.value);
   };
 
   const handleSendMessage = async () => {
-    if (input.trim() === "") return;
+    if (input.trim() === "" || isLoading) return;
 
     const userMessage = { sender: "user", text: input };
-    setMessages((prevMessages) => [...prevMessages, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/chat", {
+      const response = await fetch(`${API_URL}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: input }),
@@ -63,18 +69,17 @@ const Chatbot = () => {
       const data = await response.json();
       const botResponse = { sender: "bot", text: data.response };
 
-      setMessages((prevMessages) => [...prevMessages, botResponse]);
+      setMessages((prev) => [...prev, botResponse]);
     } catch (error) {
       console.error("Erreur lors de l'envoi du message :", error);
-      setMessages((prevMessages) => [
-        ...prevMessages,
+      setMessages((prev) => [
+        ...prev,
         { sender: "bot", text: "Une erreur est survenue. Veuillez réessayer." },
       ]);
     } finally {
       setIsLoading(false);
+      setInput("");
     }
-
-    setInput("");
   };
 
   const handleKeyPress = (e) => {
@@ -93,8 +98,9 @@ const Chatbot = () => {
       <div className={`chatbot ${visible ? "show" : "hide"}`} ref={chatbotRef}>
         <header>
           <h2>Said's Bot</h2>
+          <button onClick={() => setVisible(false)}>✖️</button>
         </header>
-        <ul className="conversation">
+        <ul className="conversation" ref={conversationRef}>
           {messages.map((msg, index) => (
             <li key={index} className={`chat ${msg.sender}`}>
               <p>{msg.text}</p>
@@ -112,8 +118,13 @@ const Chatbot = () => {
             value={input}
             onChange={handleInputChange}
             onKeyDown={handleKeyPress}
+            disabled={isLoading}
           ></textarea>
-          <span className="material-symbols-outlined" onClick={handleSendMessage}>
+          <span
+            className="material-symbols-outlined"
+            onClick={handleSendMessage}
+            style={{ cursor: isLoading ? "not-allowed" : "pointer" }}
+          >
             send
           </span>
         </div>
